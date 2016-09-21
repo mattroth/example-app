@@ -9,7 +9,7 @@ import * as layoutActions from '../actions/layout';
 @Component({
   selector: 'book-collection-app',
   template: `
-    <bc-layout [hasDevtools]="!prod">
+    <bc-layout>
       <bc-sidenav [open]="showSidenav$ | async">
         <bc-nav-item (activate)="closeSidenav()" routerLink="/" icon="book" hint="View your book collection">
           My Collection
@@ -28,8 +28,7 @@ import * as layoutActions from '../actions/layout';
 })
 export class AppComponent {
   constructor(private store: Store<fromRoot.State>) { }
-
-  prod = PROD; // PROD flag defined by Webpack
+  
   showSidenav$ = this.store.let(fromRoot.getShowSidenav);
 
   closeSidenav() {

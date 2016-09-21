@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/publishReplay';
-import 'rxjs/add/operator/multicast';
+import { multicast } from 'rxjs/operator/multicast';
 import { Scheduler } from 'rxjs/Scheduler';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Observable } from 'rxjs/Observable';
@@ -26,18 +26,49 @@ export function label<T>(label: T | ''): T {
   return <T>label;
 }
 
-export interface Selector<T, V> {
-  (input: Observable<T>): Observable<V>;
+export interface SelectorFn<T, V> {
+  (input$: Observable<T>): Observable<V>;
 }
 
-export function share<T, V>(selector: Selector<T, V>): Selector<T, V> {
-  let result: Observable<V>;
+export interface Selector<T, V> extends SelectorFn<T, V> {
+  readonly cachedResult?: null | Observable<V>;
+  reset(): void;
+  override(source$: Observable<V>): void;
+}
 
-  return function(input: Observable<T>) {
-    if (!result) {
-      result = selector(input).multicast(() => new ReplaySubject<V>(1)).refCount();
+export function share<T, V>(selectFn: SelectorFn<T, V>): Selector<T, V> {
+  let cachedResult: null | Observable<V>;
+
+
+  const override = function (source$: Observable<V>) {
+    cachedResult = source$;
+  };
+
+  const reset = function () {
+    cachedResult = null;
+  };
+
+  const multicastFactory = function () {
+    return new ReplaySubject<V>(1);
+  };
+
+  const selector: any = function (input$: Observable<T>) {
+    if (Boolean(cachedResult)) {
+      return cachedResult;
     }
 
-    return result;
+    return cachedResult = multicast.call(selectFn(input$), multicastFactory).refCount();
   };
+
+  selector.override = override;
+  selector.reset = reset;
+  Object.defineProperty(selector, 'cachedResult', {
+    configurable: true,
+    enumerable: true,
+    get() {
+      return cachedResult;
+    }
+  });
+
+  return selector;
 }

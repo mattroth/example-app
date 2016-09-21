@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
   selector: 'bc-layout',
   template: `
-    <md-sidenav-layout fullscreen [class.with-devtools]="hasDevtools">
+    <md-sidenav-layout fullscreen>
       
       <ng-content></ng-content>
 
@@ -14,10 +14,6 @@ import { Component, Input } from '@angular/core';
     md-sidenav-layout {
       background: rgba(0, 0, 0, 0.03);
     }
-
-    .with-devtools {
-      right: 30% !important; // Make space for the devtools
-    }
     
     *, /deep/ * {
       -webkit-font-smoothing: antialiased;
@@ -25,6 +21,4 @@ import { Component, Input } from '@angular/core';
     }
   `]
 })
-export class LayoutComponent {
-  @Input() hasDevtools = false;
-}
+export class LayoutComponent { }
