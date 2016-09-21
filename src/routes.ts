@@ -1,10 +1,18 @@
 import { Routes } from '@angular/router';
 
-import { BookExistsGuard } from './guards/book-exists';
-import { FindBookPageComponent } from './containers/find-book-page';
-import { ViewBookPageComponent } from './containers/view-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
+
+declare var System: any;
+declare var PROD: any;
+
+function loadBookModule() {
+  if (PROD) {
+    return System.import('./features/book/book.module.ngfactory').then((module: any) => module.BookModuleNgFactory);
+  } else {
+    return System.import('./features/book/book.module').then((module: any) => module.BookModule);
+  }
+}
 
 export const routes: Routes = [
   {
@@ -12,13 +20,8 @@ export const routes: Routes = [
     component: CollectionPageComponent
   },
   {
-    path: 'book/find',
-    component: FindBookPageComponent
-  },
-  {
-    path: 'book/:id',
-    canActivate: [ BookExistsGuard ],
-    component: ViewBookPageComponent
+    path: 'book',
+    loadChildren: loadBookModule
   },
   {
     path: '**',

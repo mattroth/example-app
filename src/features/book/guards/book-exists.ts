@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { GoogleBooksService } from '../services/google-books';
-import * as fromRoot from '../reducers';
-import { LoadBookAction } from '../actions/book';
+import { GoogleBooksService } from '../../../services/google-books';
+import * as fromRoot from '../../../reducers';
+import { LoadBookAction } from '../../../actions/book';
 
 
 /**

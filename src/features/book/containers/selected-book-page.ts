@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromRoot from '../reducers';
-import { AddBookAction, RemoveBookAction } from '../actions/collection';
+import * as fromRoot from '../../../reducers';
+import { AddBookAction, RemoveBookAction } from '../../../actions/collection';
 import { BookInput, InCollectionInput, AddOutput, RemoveOutput } from '../components/book-detail';
 
 

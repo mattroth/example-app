@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromRoot from '../reducers';
-import { SearchBooksAction } from '../actions/book';
+import * as fromRoot from '../../../reducers';
+import { SearchBooksAction } from '../../../actions/book';
 import { QueryInput, SearchOutput } from '../components/book-search';
-import { BooksInput } from '../components/book-preview-list';
+import { BooksInput } from '../../../components/book-preview-list';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class FindBookPageComponent {
     /**
      * All state updates are handled through dispatched actions in 'container'
      * components. This provides a clear, reproducible history of state
-     * updates and user interaction through the life of our 
+     * updates and user interaction through the life of our
      * application.
      */
     this.store.dispatch(new SearchBooksAction(query));

@@ -12,12 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MATERIAL_IMPORTS } from './material';
 import { ComponentsModule } from './components';
 import { BookEffects } from './effects/book';
-import { BookExistsGuard } from './guards/book-exists';
 
 import { AppComponent } from './containers/app';
-import { FindBookPageComponent } from './containers/find-book-page';
-import { ViewBookPageComponent } from './containers/view-book-page';
-import { SelectedBookPageComponent } from './containers/selected-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
 
@@ -88,14 +84,10 @@ import { schema } from './db';
   ],
   declarations: [
     AppComponent,
-    FindBookPageComponent,
-    SelectedBookPageComponent,
-    ViewBookPageComponent,
     CollectionPageComponent,
     NotFoundPageComponent
   ],
   providers: [
-    BookExistsGuard,
     GoogleBooksService
   ],
   bootstrap: [

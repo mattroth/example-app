@@ -11,7 +11,7 @@
     "prebuild": "npm run build:aot && npm run material:backup && npm run material:clean",
     "build": "webpack -p --env.prod",
     "postbuild": "npm run material:restore",
-    "server:dev": "webpack-dashboard -- webpack-dev-server --hot",
+    "server:dev": "webpack-dev-server --hot",
     "start": "npm run server:dev",
     "test": "karma start --single-run",
     "test:watch": "karma start"

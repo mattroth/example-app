@@ -7,30 +7,17 @@ import { MdCardModule } from '@angular2-material/card';
 import { MdIconModule } from '@angular2-material/icon';
 import { MdInputModule } from '@angular2-material/input';
 import { MdListModule } from '@angular2-material/list';
-import { MdSidenavModule } from '@angular2-material/sidenav';
-import { MdToolbarModule } from '@angular2-material/toolbar';
 import { MdProgressCircleModule } from '@angular2-material/progress-circle';
-import { RouterModule } from '@angular/router';
 
-import { BookPreviewComponent } from './book-preview';
-import { BookPreviewListComponent } from './book-preview-list';
-import { LayoutComponent } from './layout';
-import { NavItemComponent } from './nav-item';
-import { SidenavComponent } from './sidenav';
-import { ToolbarComponent } from './toolbar';
+import { BookDetailComponent } from './book-detail';
+import { BookSearchComponent } from './book-search';
 
-import { PipesModule } from '../pipes';
-
+import { PipesModule } from '../../../pipes';
 
 export const COMPONENTS = [
-  BookPreviewComponent,
-  BookPreviewListComponent,
-  LayoutComponent,
-  NavItemComponent,
-  SidenavComponent,
-  ToolbarComponent,
+  BookDetailComponent,
+  BookSearchComponent,
 ];
-
 
 @NgModule({
   imports: [
@@ -42,13 +29,10 @@ export const COMPONENTS = [
     MdIconModule,
     MdInputModule,
     MdListModule,
-    MdSidenavModule,
-    MdToolbarModule,
     MdProgressCircleModule,
-    RouterModule,
-    PipesModule,
+    PipesModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
-export class ComponentsModule { }
+export class BookComponentsModule { }
